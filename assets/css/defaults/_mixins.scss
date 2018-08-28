@@ -1,0 +1,212 @@
+@mixin for-phones {
+    @media (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin for-phone-portrait {
+    @media (max-width: 544px) {
+        @content;
+    }
+}
+
+@mixin for-phone-landscape {
+    @media (min-width: 544px) and (max-width: 768px) {
+        @content;
+    }
+}
+
+@mixin for-tablets-down {
+    @media (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin for-tablets {
+    @media (min-width: 768px) and (max-width: 992px) {
+        @content;
+    }
+}
+
+@mixin for-tablets-up {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin for-desktop {
+    @media (min-width: 992px) and (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin for-desktop-up {
+    @media (min-width: 992px) {
+        @content;
+    }
+}
+
+@mixin for-large-devices {
+    @media (min-width: 1200px) {
+        @content;
+    }
+}
+
+.for-phone-portrait {
+    @include for-phone-landscape {
+        display: none;
+    }
+    @include for-tablets-up {
+        display: none;
+    }
+    @include for-phone-portrait {
+        display: block;
+    }
+}
+
+.for-phone-landscape {
+    @include for-tablets-up {
+        display: none;
+    }
+    @include for-phone-portrait {
+        display: block;
+    }
+    @include for-phone-landscape {
+        display: block;
+    }
+}
+
+.for-tablets-down {
+    @include for-desktop-up {
+        display: none;
+    }
+    @include for-tablets-down {
+        display: block;
+    }
+}
+
+.for-tablets {
+    @include for-phone-portrait {
+        display: none;
+    }
+    @include for-phone-landscape {
+        display: none;
+    }
+    @include for-desktop-up {
+        display: none;
+    }
+    @include for-tablets {
+        display: block;
+    }
+}
+
+.for-tablets-up {
+    @include for-phone-portrait {
+        display: none;
+    }
+    @include for-phone-landscape {
+        display: none;
+    }
+    @include for-tablets-up {
+        display: block;
+    }
+}
+
+.for-desktop {
+    @include for-tablets-down {
+        display: none;
+    }
+    @include for-desktop {
+        display: block;
+    }
+}
+
+.for-desktop-up {
+    @include for-tablets-down {
+        display: none;
+    }
+    @include for-desktop-up {
+        display: block;
+    }
+}
+
+.for-large-devices {
+    @include for-tablets-down {
+        display: none;
+    }
+    @include for-desktop-up {
+        display: none;
+    }
+    @include for-large-devices {
+        display: block;
+    }
+}
+
+$fontSize: 16;
+@function pxToRem($pixels) {
+    @return #{$pixels / $fontSize}rem;
+}
+
+@function px($pixels) {
+    @return #{$pixels / $fontSize}rem;
+}
+
+@mixin center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin lato {
+  font-family: 'Lato', sans-serif;
+}
+@mixin cormorant {
+  font-family: 'Cormorant', serif;
+}
+
+/* convert PS letter */
+@function tracking( $target ) {
+  @return ($target / 1000) * 1em;
+}
+
+@mixin kerning( $target ) {
+  letter-spacing: tracking( $target );
+}
+
+/* Convert PS font style */
+@mixin fontweight( $weight: regular ) {
+  @if $weight == light {
+    font-weight: 300;
+  } @else if $weight == regular {
+    font-weight: 400;
+  } @else if $weight == medium {
+    font-weight: 500;
+  } @else if $weight == semi {
+    font-weight: 600;
+  } @else if $weight == bold {
+    font-weight: 700;
+  } @else {
+    font-weight: 400;
+  }
+}
+
+/* quickly add transitions */
+@mixin transition( $element: all, $speed: 0.3s, $effect: ease-in-out ) {
+  transition: $element $speed $effect;
+}
+
+/** full background **/
+@mixin background {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@mixin dropshadow {
+    box-shadow: 0px 0px 1.3399999999999999px 0.66px rgba(0, 0, 0, 0.29);
+}
+
+@mixin textshadow {
+    text-shadow: 0px 0px 1.3399999999999999px rgba(0, 0, 0, 0.29);
+}
