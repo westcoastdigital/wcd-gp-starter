@@ -38,6 +38,14 @@ function pwd_child_enqueue_scripts()
 add_action('wp_enqueue_scripts', 'pwd_child_enqueue_scripts', 100);
 
 /**
+ * Enqueue editor styles
+ */
+function pwd_editor_enqueue_styles() {
+	add_editor_style(get_stylesheet_directory_uri() . '/assets/css/style.css');
+}
+add_action( 'admin_init', 'pwd_editor_enqueue_styles' );
+
+/**
  * Google Analytics
  */
 function pwd_ga_head_code()
